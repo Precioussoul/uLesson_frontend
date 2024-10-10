@@ -16,7 +16,7 @@ export let students: Student[] = [
 ]
 
 export async function GET() {
-  return NextResponse.json({message: "GET request received", data: students.reverse()})
+  return NextResponse.json({message: "GET request received", data: students})
 }
 
 // Handle POST requests - Create a new student
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     id: students.length + 1,
     ...body,
   }
-  students.push(newstudent)
+  students.unshift(newstudent)
 
   revalidatePath("/")
 

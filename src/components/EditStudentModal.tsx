@@ -15,7 +15,7 @@ interface EditStudentModal {
 const EditStudentModal = ({isOpen, onClose, student}: EditStudentModal) => {
   const router = useRouter()
   const editStudentInfo = useCallback(async (data: any) => {
-    await fetch("http://localhost:3000/api/students", {
+    await fetch(`http://localhost:3000/api/students/${data.id}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(data),
