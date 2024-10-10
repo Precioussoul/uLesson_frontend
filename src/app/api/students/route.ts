@@ -1,13 +1,5 @@
 import {NextResponse} from "next/server"
-
-interface Student {
-  id: string
-  name: string
-  registrationNumber: string
-  major: string
-  dob: string
-  gpa: number
-}
+import {Student} from "@/types"
 
 export let students: Student[] = [
   {id: "1", name: "John Doe", registrationNumber: "202401234", major: "Computer Science", dob: "2001-05-05", gpa: 3.8},

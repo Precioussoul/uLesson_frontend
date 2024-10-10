@@ -21,13 +21,29 @@ interface StudentsTableProps {
 
 const StudentsTable = ({data}: StudentsTableProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [student, setStudent] = useState<Student>()
+
+  const getStudentInfo = useCallback(async (id: string | number) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/students/${id}`)
+      if (!response.ok) {
+        throw new Error("Network response was not ok")
+      }
+      const data = await response.json()
+      const student: Student = data.data
+      setStudent(student)
+    } catch (error) {
+      console.error("Failed to fetch student info:", error)
+    }
+  }, [])
 
   const handleStudentDelete = (id: string | number) => {}
   const handleEditStudent = (id: string | number) => {
     setIsOpen(true)
+    getStudentInfo(id)
   }
 
-  console.log("Student", data)
+  console.log("Student", student)
 
   return (
     <>
@@ -67,7 +83,7 @@ const StudentsTable = ({data}: StudentsTableProps) => {
           </Tbody>
         </Table>
       </TableContainer>
-      <EditStudentModal isOpen={isOpen} onClose={() => setIsOpen((prev) => !prev)} />
+      <EditStudentModal isOpen={isOpen} onClose={() => setIsOpen((prev) => !prev)} student={student} />
     </>
   )
 }
