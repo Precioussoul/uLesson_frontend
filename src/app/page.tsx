@@ -17,7 +17,6 @@ async function Home() {
 
   return (
     <div className='w-full bg-white p-4'>
-      <Navbar />
       <div className='container mx-auto mt-10 flex flex-col gap-8 '>
         <div className=''>
           <StudentStats />

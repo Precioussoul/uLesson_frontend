@@ -5,6 +5,8 @@ import {MdOutlineDelete, MdOutlineEdit} from "react-icons/md"
 import EditStudentModal from "./EditStudentModal"
 import DeleteStudentModal from "./DeleteStudentModal"
 import {useAppContext} from "@/context/AppContext"
+import {useRouter} from "next/navigation"
+import {FaExternalLinkAlt} from "react-icons/fa"
 
 interface Student {
   id: string
@@ -22,7 +24,8 @@ interface StudentsTableProps {
 }
 
 const StudentsTable = ({data}: StudentsTableProps) => {
-  const {students} = useAppContext()
+  const router = useRouter()
+  const {students, isSearching} = useAppContext()
   const [isOpen, setIsOpen] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
 
@@ -52,9 +55,9 @@ const StudentsTable = ({data}: StudentsTableProps) => {
     getStudentInfo(id)
   }
 
-  console.log("Student", student)
+  console.log("Students", students)
 
-  const results = students.length > 0 ? students : data.data
+  const results = isSearching ? students : data.data
 
   return (
     <>
@@ -81,11 +84,15 @@ const StudentsTable = ({data}: StudentsTableProps) => {
                   <Td>{student.gpa}</Td>
                   <Td>
                     <div className='flex items-center gap-4'>
-                      <div className='flex items-center justify-center border border-gray-200 rounded-lg p-2'>
+                      <div className='flex items-center justify-center border border-gray-200 rounded-lg p-2 cursor-pointer'>
                         <MdOutlineEdit size={20} onClick={() => handleEditStudent(student.id)} />
                       </div>
-                      <div className='flex items-center justify-center border border-gray-200 rounded-lg p-2'>
+                      <div className='flex items-center justify-center border border-gray-200 rounded-lg p-2 cursor-pointer'>
                         <MdOutlineDelete size={20} onClick={() => handleStudentDelete(student.id)} />
+                      </div>
+
+                      <div className='flex items-center justify-center border border-gray-200 rounded-lg p-2 cursor-pointer'>
+                        <FaExternalLinkAlt size={15} onClick={() => router.push(`/students/${student.id}`)} />
                       </div>
                     </div>
                   </Td>
