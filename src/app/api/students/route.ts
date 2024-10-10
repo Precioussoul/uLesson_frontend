@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server"
 import {Student} from "@/types"
+import {revalidatePath} from "next/cache"
 
 export let students: Student[] = [
   {id: "1", name: "John Doe", registrationNumber: "202401234", major: "Computer Science", dob: "2001-05-05", gpa: 3.8},
@@ -27,6 +28,8 @@ export async function POST(req: Request) {
   }
   students.push(newstudent)
 
+  revalidatePath("/")
+
   return NextResponse.json({
     message: "POST request received, student created",
     data: newstudent,
@@ -45,6 +48,8 @@ export async function PUT(req: Request) {
     student.dob = dob
     student.gpa = gpa
 
+    revalidatePath("/")
+
     return NextResponse.json({
       message: "student record successfully updated",
       updatedData: student,
@@ -62,6 +67,8 @@ export async function DELETE(req: Request) {
   const studentIndex = students.findIndex((student) => student.id === id)
   if (studentIndex > -1) {
     const deletedstudent = students.splice(studentIndex, 1)[0]
+
+    revalidatePath("/")
 
     return NextResponse.json({
       message: "student record successfully deleted",

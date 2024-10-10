@@ -1,13 +1,11 @@
 "use server"
 
-import AddStudentModal from "@/components/AddStudentModal"
 import Navbar from "@/components/Navbar"
 import StudentStats from "@/components/StudentStats"
 import StudentsTable from "@/components/Table"
-import Image from "next/image"
 
 async function getStudentsRecord() {
-  const response = await fetch("http:localhost:3000/api/students")
+  const response = await fetch("http:localhost:3000/api/students", {cache: "no-store"})
   const data = await response.json()
 
   return data

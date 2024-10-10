@@ -5,6 +5,7 @@ import {Student} from "@/types"
 import {Skeleton, Stack} from "@chakra-ui/react"
 import {Formik, Form, useFormik} from "formik"
 import {validationStudentUpdateSchema} from "@/utils/validateSchemas"
+import {useRouter} from "next/navigation"
 interface EditStudentModal {
   onClose: () => void
   isOpen: boolean
@@ -12,6 +13,7 @@ interface EditStudentModal {
 }
 
 const EditStudentModal = ({isOpen, onClose, student}: EditStudentModal) => {
+  const router = useRouter()
   const editStudentInfo = useCallback(async (data: any) => {
     await fetch("http://localhost:3000/api/students", {
       method: "PUT",
@@ -36,6 +38,8 @@ const EditStudentModal = ({isOpen, onClose, student}: EditStudentModal) => {
     onSubmit: (values) => {
       console.log("Form Data:", values) // Handle form submission
       editStudentInfo(values)
+      onClose()
+      router.refresh()
     },
     enableReinitialize: true, // Allows reinitializing when initialValues change
   })
