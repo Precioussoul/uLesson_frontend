@@ -1,3 +1,9 @@
+"use server"
+
+import AddStudentModal from "@/components/AddStudentModal"
+import Navbar from "@/components/Navbar"
+import StudentStats from "@/components/StudentStats"
+import StudentsTable from "@/components/Table"
 import Image from "next/image"
 
 async function getStudentsRecord() {
@@ -8,9 +14,20 @@ async function getStudentsRecord() {
 }
 
 async function Home() {
-  console.log("students", await getStudentsRecord())
+  const studentsRecord = await getStudentsRecord()
+  console.log("students", studentsRecord)
 
-  return <div className=''>Home</div>
+  return (
+    <div className='w-full bg-white'>
+      <Navbar />
+      <div className='container mx-auto mt-10 flex flex-col gap-8 '>
+        <div className=''>
+          <StudentStats />
+        </div>
+        <StudentsTable data={studentsRecord} />
+      </div>
+    </div>
+  )
 }
 
 export default Home
