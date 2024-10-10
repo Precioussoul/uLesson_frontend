@@ -15,7 +15,27 @@ export let students: Student[] = [
   {id: "10", name: "Hannah White", registrationNumber: "202401243", major: "Literature", dob: "2002-06-22", gpa: 3.5},
 ]
 
-export async function GET() {
+export async function GET(req: Request) {
+  const {searchParams} = new URL(req.url)
+
+  // Extract query parameters (e.g., id, name)
+  const searchQuery = searchParams.get("search")?.toLowerCase() || ""
+
+  console.log("search", searchQuery)
+
+  if (searchQuery) {
+    const results = students.filter(
+      (student) =>
+        student.name.toLowerCase().includes(searchQuery) ||
+        student.registrationNumber.toLowerCase().includes(searchQuery) ||
+        student.major.toLowerCase().includes(searchQuery) ||
+        student.gpa === Number(searchQuery)
+    )
+    console.log("results", results)
+    revalidatePath("/")
+    return NextResponse.json({message: "Student found", data: results})
+  }
+
   return NextResponse.json({message: "GET request received", data: students})
 }
 

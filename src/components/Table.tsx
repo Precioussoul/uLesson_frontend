@@ -4,6 +4,7 @@ import {Table, Thead, Tbody, Tr, Th, Td, TableContainer} from "@chakra-ui/react"
 import {MdOutlineDelete, MdOutlineEdit} from "react-icons/md"
 import EditStudentModal from "./EditStudentModal"
 import DeleteStudentModal from "./DeleteStudentModal"
+import {useAppContext} from "@/context/AppContext"
 
 interface Student {
   id: string
@@ -21,6 +22,7 @@ interface StudentsTableProps {
 }
 
 const StudentsTable = ({data}: StudentsTableProps) => {
+  const {students} = useAppContext()
   const [isOpen, setIsOpen] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
 
@@ -52,6 +54,8 @@ const StudentsTable = ({data}: StudentsTableProps) => {
 
   console.log("Student", student)
 
+  const results = students.length > 0 ? students : data.data
+
   return (
     <>
       <TableContainer>
@@ -67,8 +71,8 @@ const StudentsTable = ({data}: StudentsTableProps) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.data.length > 0 &&
-              data.data.map((student, idx) => (
+            {results.length > 0 &&
+              results.map((student, idx) => (
                 <Tr key={idx}>
                   <Td>{student.name}</Td>
                   <Td>{student.registrationNumber}</Td>
