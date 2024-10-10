@@ -49,7 +49,7 @@ const EditStudentModal = ({isOpen, onClose, student}: EditStudentModal) => {
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add New Student</ModalHeader>
+        <ModalHeader>Edit Student</ModalHeader>
         <ModalCloseButton />
         {student ? (
           <ModalBody>

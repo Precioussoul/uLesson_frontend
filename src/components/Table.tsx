@@ -3,6 +3,7 @@ import React, {useCallback, useState} from "react"
 import {Table, Thead, Tbody, Tr, Th, Td, TableContainer} from "@chakra-ui/react"
 import {MdOutlineDelete, MdOutlineEdit} from "react-icons/md"
 import EditStudentModal from "./EditStudentModal"
+import DeleteStudentModal from "./DeleteStudentModal"
 
 interface Student {
   id: string
@@ -21,7 +22,10 @@ interface StudentsTableProps {
 
 const StudentsTable = ({data}: StudentsTableProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [openDelete, setOpenDelete] = useState(false)
+
   const [student, setStudent] = useState<Student>()
+  const [studentId, setStudentId] = useState<string | number>(0)
 
   const getStudentInfo = useCallback(async (id: string | number) => {
     try {
@@ -37,7 +41,10 @@ const StudentsTable = ({data}: StudentsTableProps) => {
     }
   }, [])
 
-  const handleStudentDelete = (id: string | number) => {}
+  const handleStudentDelete = (id: string | number) => {
+    setOpenDelete(true)
+    setStudentId(id)
+  }
   const handleEditStudent = (id: string | number) => {
     setIsOpen(true)
     getStudentInfo(id)
@@ -84,6 +91,7 @@ const StudentsTable = ({data}: StudentsTableProps) => {
         </Table>
       </TableContainer>
       <EditStudentModal isOpen={isOpen} onClose={() => setIsOpen((prev) => !prev)} student={student} />
+      <DeleteStudentModal isOpen={openDelete} onClose={() => setOpenDelete((prev) => !prev)} studentId={studentId} />
     </>
   )
 }
