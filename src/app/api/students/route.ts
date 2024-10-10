@@ -16,7 +16,7 @@ export let students: Student[] = [
 ]
 
 export async function GET() {
-  return NextResponse.json({message: "GET request received", data: students})
+  return NextResponse.json({message: "GET request received", data: students.reverse()})
 }
 
 // Handle POST requests - Create a new student
@@ -34,47 +34,4 @@ export async function POST(req: Request) {
     message: "POST request received, student created",
     data: newstudent,
   })
-}
-
-export async function PUT(req: Request) {
-  const body = await req.json()
-  const {id, name, registrationNumber, major, dob, gpa} = body
-
-  const student = students.find((student) => student.id === id)
-  if (student) {
-    student.name = name
-    student.registrationNumber = registrationNumber
-    student.major = major
-    student.dob = dob
-    student.gpa = gpa
-
-    revalidatePath("/")
-
-    return NextResponse.json({
-      message: "student record successfully updated",
-      updatedData: student,
-    })
-  } else {
-    return NextResponse.json({message: `student with id ${id} not found`}, {status: 404})
-  }
-}
-
-export async function DELETE(req: Request) {
-  const body = await req.json()
-  const {id} = body
-
-  // Remove student by ID
-  const studentIndex = students.findIndex((student) => student.id === id)
-  if (studentIndex > -1) {
-    const deletedstudent = students.splice(studentIndex, 1)[0]
-
-    revalidatePath("/")
-
-    return NextResponse.json({
-      message: "student record successfully deleted",
-      deletedData: deletedstudent,
-    })
-  } else {
-    return NextResponse.json({message: `student with id ${id} not found`}, {status: 404})
-  }
 }
