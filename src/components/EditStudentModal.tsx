@@ -1,5 +1,5 @@
 "use client"
-import React from "react"
+import React, {useCallback} from "react"
 import {Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Input} from "@chakra-ui/react"
 
 interface EditStudentModal {
@@ -8,6 +8,12 @@ interface EditStudentModal {
 }
 
 const EditStudentModal = ({isOpen, onClose}: EditStudentModal) => {
+  const editStudentInfo = useCallback(async (data: any) => {
+    await fetch("http://localhost:3000/api/student", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    })
+  }, [])
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

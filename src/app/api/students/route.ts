@@ -9,7 +9,7 @@ interface Student {
   gpa: number
 }
 
-let students: Student[] = [
+export let students: Student[] = [
   {id: "1", name: "John Doe", registrationNumber: "202401234", major: "Computer Science", dob: "2001-05-05", gpa: 3.8},
   {id: "2", name: "Jane Smith", registrationNumber: "202401235", major: "Mathematics", dob: "2000-08-15", gpa: 3.9},
   {id: "3", name: "Alice Johnson", registrationNumber: "202401236", major: "Physics", dob: "2002-01-20", gpa: 3.7},
@@ -43,11 +43,16 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
   const body = await req.json()
-  const {id, name} = body
+  const {id, name, registrationNumber, major, dob, gpa} = body
 
   const student = students.find((student) => student.id === id)
   if (student) {
     student.name = name
+    student.registrationNumber = registrationNumber
+    student.major = major
+    student.dob = dob
+    student.gpa = gpa
+
     return NextResponse.json({
       message: "student record successfully updated",
       updatedData: student,

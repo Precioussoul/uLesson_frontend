@@ -1,7 +1,7 @@
 "use client"
-import React, {useState} from "react"
+import React, {useCallback, useState} from "react"
 import {Table, Thead, Tbody, Tr, Th, Td, TableContainer} from "@chakra-ui/react"
-import {MdDelete, MdEdit, MdEditNote, MdOutlineDelete, MdOutlineEdit} from "react-icons/md"
+import {MdOutlineDelete, MdOutlineEdit} from "react-icons/md"
 import EditStudentModal from "./EditStudentModal"
 
 interface Student {
@@ -21,6 +21,7 @@ interface StudentsTableProps {
 
 const StudentsTable = ({data}: StudentsTableProps) => {
   const [isOpen, setIsOpen] = useState(false)
+
   const handleStudentDelete = (id: string | number) => {}
   const handleEditStudent = (id: string | number) => {
     setIsOpen(true)
