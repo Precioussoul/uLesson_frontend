@@ -6,6 +6,7 @@ import AddStudentModal from "./AddStudentModal"
 import {useEffect, useState} from "react"
 import {useRouter} from "next/navigation"
 import {useAppContext} from "@/context/AppContext"
+import Link from "next/link"
 
 const Navbar = () => {
   const {getSearchInput} = useAppContext()
@@ -21,9 +22,9 @@ const Navbar = () => {
   return (
     <div className='w-full bg-white p-4 border-b border-gray-200'>
       <nav className='container mx-auto flex flex-col gap-5 md:flex-row md:items-center md:justify-between'>
-        <div className=''>
+        <Link href={"/"} className=''>
           <h2 className='font-semibold text-black text-2xl'>ULesson</h2>
-        </div>
+        </Link>
         <div className='flex flex-col w-full md:flex-row md:items-center gap-4 md:w-1/2'>
           <InputGroup>
             <InputLeftElement pointerEvents='none'>

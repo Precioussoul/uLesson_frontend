@@ -7,6 +7,7 @@ import DeleteStudentModal from "./DeleteStudentModal"
 import {useAppContext} from "@/context/AppContext"
 import {useRouter} from "next/navigation"
 import {FaExternalLinkAlt} from "react-icons/fa"
+import Link from "next/link"
 
 interface Student {
   id: string
@@ -91,9 +92,12 @@ const StudentsTable = ({data}: StudentsTableProps) => {
                         <MdOutlineDelete size={20} onClick={() => handleStudentDelete(student.id)} />
                       </div>
 
-                      <div className='flex items-center justify-center border border-gray-200 rounded-lg p-2 cursor-pointer'>
-                        <FaExternalLinkAlt size={15} onClick={() => router.push(`/students/${student.id}`)} />
-                      </div>
+                      <Link
+                        href={`/students/${student.id}`}
+                        className='flex items-center justify-center border border-gray-200 rounded-lg p-2 cursor-pointer'
+                      >
+                        <FaExternalLinkAlt size={15} />
+                      </Link>
                     </div>
                   </Td>
                 </Tr>
