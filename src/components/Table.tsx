@@ -43,7 +43,7 @@ const StudentsTable = ({data}: StudentsTableProps) => {
               <Tr key={idx}>
                 <Td>{student.name}</Td>
                 <Td>{student.registrationNumber}</Td>
-                <Td>{student.name}</Td>
+                <Td>{student.major}</Td>
                 <Td>{student.dob}</Td>
                 <Td>{student.gpa}</Td>
                 <Td>
