@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server"
-import {students} from "../route"
+import {students} from "@/app/db"
 import {revalidatePath} from "next/cache"
 
 // Handle GET request for a specific user
