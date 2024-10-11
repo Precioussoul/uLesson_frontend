@@ -12,7 +12,6 @@ async function getStudentsRecord() {
 
 async function Home() {
   const studentsRecord = await getStudentsRecord()
-  console.log("students", studentsRecord)
 
   return (
     <div className='w-full bg-white p-4'>

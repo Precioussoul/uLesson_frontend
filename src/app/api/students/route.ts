@@ -20,8 +20,6 @@ export async function GET(req: Request) {
 
   const searchQuery = searchParams.get("search")?.toLowerCase()
 
-  console.log("search", searchQuery)
-
   if (searchQuery) {
     const results = students.filter(
       (student) =>
@@ -30,7 +28,6 @@ export async function GET(req: Request) {
         student.major.toLowerCase().includes(searchQuery) ||
         student.gpa === Number(searchQuery)
     )
-    console.log("results", results)
     revalidatePath("/")
     return NextResponse.json({message: "Student found", data: results})
   }

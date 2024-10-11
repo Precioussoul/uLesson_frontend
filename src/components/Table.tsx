@@ -54,8 +54,6 @@ const StudentsTable = ({data}: StudentsTableProps) => {
     getStudentInfo(id)
   }
 
-  console.log("Students", students)
-
   const results = isSearching ? students : data.data
 
   return (

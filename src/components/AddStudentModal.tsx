@@ -33,7 +33,6 @@ const AddStudentModal = ({isOpen, onClose}: AddStudentModal) => {
     initialValues,
     validationSchema: validationStudentUpdateSchema,
     onSubmit: (values) => {
-      console.log("Form Data:", values) // Handle form submission
       addStudentInfo(values)
       onClose()
       router.refresh()
