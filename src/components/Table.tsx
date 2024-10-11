@@ -5,7 +5,6 @@ import {MdOutlineDelete, MdOutlineEdit} from "react-icons/md"
 import EditStudentModal from "./EditStudentModal"
 import DeleteStudentModal from "./DeleteStudentModal"
 import {useAppContext} from "@/context/AppContext"
-import {useRouter} from "next/navigation"
 import {FaExternalLinkAlt} from "react-icons/fa"
 import Link from "next/link"
 
@@ -25,7 +24,6 @@ interface StudentsTableProps {
 }
 
 const StudentsTable = ({data}: StudentsTableProps) => {
-  const router = useRouter()
   const {students, isSearching} = useAppContext()
   const [isOpen, setIsOpen] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)

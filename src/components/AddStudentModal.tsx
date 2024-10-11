@@ -1,6 +1,6 @@
 "use client"
 import React, {useCallback} from "react"
-import {Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Input} from "@chakra-ui/react"
+import {Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Input} from "@chakra-ui/react"
 import {useFormik} from "formik"
 import {validationStudentUpdateSchema} from "@/utils/validateSchemas"
 import {useRouter} from "next/navigation"

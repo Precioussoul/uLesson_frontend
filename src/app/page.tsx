@@ -1,6 +1,5 @@
 "use server"
 
-import Navbar from "@/components/Navbar"
 import StudentStats from "@/components/StudentStats"
 import StudentsTable from "@/components/Table"
 

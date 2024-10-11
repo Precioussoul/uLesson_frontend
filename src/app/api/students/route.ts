@@ -18,7 +18,6 @@ export let students: Student[] = [
 export async function GET(req: Request) {
   const {searchParams} = new URL(req.url)
 
-  // Extract query parameters (e.g., id, name)
   const searchQuery = searchParams.get("search")?.toLowerCase()
 
   console.log("search", searchQuery)
